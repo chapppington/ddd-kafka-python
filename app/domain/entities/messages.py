@@ -1,6 +1,10 @@
-from dataclasses import dataclass, field
 import uuid
+from dataclasses import (
+    dataclass,
+    field,
+)
 from datetime import datetime
+
 from domain.value_objects.messages import TextValueObject
 
 
