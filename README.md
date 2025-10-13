@@ -62,7 +62,7 @@
 
    ```bash
    # Получите путь к виртуальному окружению
-   poetry env info -p
+   poetry env activate
    ```
    
    Затем в VS Code:
