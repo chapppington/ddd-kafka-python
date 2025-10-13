@@ -22,3 +22,7 @@ app-shell:
 .PHONY: app-down
 app-down:
 	${DC} -f ${APP_FILE} down
+
+.PHONY: precommit
+precommit:
+	pre-commit run --all-files
