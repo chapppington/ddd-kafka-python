@@ -1,5 +1,5 @@
 APP_CONTAINER = main-app
-APP_FILE = docker/app.yaml
+APP_FILE = docker_compose/app.yaml
 DC = docker compose
 ENV_FILE = --env-file .env # это уже вместе с командой (все норм, не трогай)
 EXEC = docker exec -it
