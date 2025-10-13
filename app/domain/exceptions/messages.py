@@ -18,6 +18,15 @@ class EmptyTextException(MessageException):
 
 
 @dataclass(eq=False)
+class TextTooLongException(MessageException):
+    text: str
+
+    @property
+    def message(self) -> str:
+        return f"Text too long: {self.text[:30]}..."
+
+
+@dataclass(eq=False)
 class TitleTooLongException(MessageException):
     text: str
 

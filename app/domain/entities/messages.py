@@ -19,3 +19,6 @@ class MessageEntity(BaseEntity):
 class ChatEntity(BaseEntity):
     title: TitleValueObject
     messages: list[MessageEntity] = field(default_factory=list, kw_only=True)
+
+    def add_message(self, message: MessageEntity):
+        self.messages.append(message)
