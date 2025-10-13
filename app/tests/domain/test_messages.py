@@ -56,8 +56,11 @@ def test_create_chat(title_value, should_raise):
 def test_add_message_to_chat():
     title = TitleValueObject(value="Hello, world!")
     chat = ChatEntity(title=title)
+
     message = MessageEntity(text=TextValueObject(value="Hello, world!"))
+
     chat.add_message(message)
+
     assert message in chat.messages
     assert chat.created_at.date() == datetime.today().date()
     assert chat.updated_at.date() == datetime.today().date()
