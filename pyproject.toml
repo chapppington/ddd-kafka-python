@@ -1,0 +1,19 @@
+[project]
+name = "ddd-kafka-python"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "chapppington",email = "stas.mega.96@bk.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "uvicorn (>=0.37.0,<0.38.0)",
+    "fastapi (>=0.119.0,<0.120.0)",
+    "motor (>=3.7.1,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
