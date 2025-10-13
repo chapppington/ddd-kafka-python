@@ -33,3 +33,7 @@ app-down:
 .PHONY: precommit 
 precommit:
 	pre-commit run --all-files
+
+.PHONY: test
+test:
+	pytest -v
