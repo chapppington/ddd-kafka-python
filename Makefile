@@ -23,6 +23,13 @@ app-shell:
 app-down:
 	${DC} -f ${APP_FILE} down
 
-.PHONY: precommit
+
+# чтобы добавить это перед коммитом надо его установить
+# poetry add pre-commit --group dev
+# и запустить
+# pre-commit install
+# и будет он срабатывать перед каждым коммитом
+# но можно и просто запустить make precommit
+.PHONY: precommit 
 precommit:
 	pre-commit run --all-files
