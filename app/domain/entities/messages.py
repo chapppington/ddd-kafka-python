@@ -1,16 +1,21 @@
-import uuid
 from dataclasses import (
     dataclass,
     field,
 )
-from datetime import datetime
 
-from domain.value_objects.messages import TextValueObject
+from domain.entities.base import BaseEntity
+from domain.value_objects.messages import (
+    TextValueObject,
+    TitleValueObject,
+)
 
 
 @dataclass
-class MessageEntity:
-    oid: str = field(default_factory=lambda: str(uuid.uuid4()))
+class MessageEntity(BaseEntity):
     text: TextValueObject
-    created_at: datetime = field(default_factory=datetime.now)
-    updated_at: datetime = field(default_factory=datetime.now)
+
+
+@dataclass
+class ChatEntity(BaseEntity):
+    title: TitleValueObject
+    messages: list[MessageEntity] = field(default_factory=list, kw_only=True)

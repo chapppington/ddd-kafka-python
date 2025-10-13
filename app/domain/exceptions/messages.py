@@ -11,9 +11,16 @@ class MessageException(ApplicationException):
 
 
 @dataclass(eq=False)
-class MessageTooLongException(MessageException):
+class EmptyTextException(MessageException):
+    @property
+    def message(self) -> str:
+        return "Text is empty"
+
+
+@dataclass(eq=False)
+class TitleTooLongException(MessageException):
     text: str
 
     @property
     def message(self) -> str:
-        return f"Message too long (>255 characters): {self.text[:30]}..."
+        return f"Title too long: {self.text[:30]}..."

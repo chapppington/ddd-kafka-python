@@ -1,0 +1,14 @@
+{
+  "material-icon-theme.folders.associations": {
+    "docker_compose": "docker",
+    "domain": "core",
+    "entities": "class",
+    "value_objects": "constant",
+    "exceptions": "error",
+    "application": "controller",
+    "infra": "server",
+    "logic": "rules",
+    "api": "api"
+  }
+}
+
