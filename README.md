@@ -58,11 +58,20 @@
    poetry install
    ```
 
-2. **Активируйте виртуальное окружение**
+2. **Настройте интерпретатор Python в IDE**
 
    ```bash
-   poetry shell
+   # Получите путь к виртуальному окружению
+   poetry env info -p
    ```
+   
+   Затем в VS Code:
+   - Нажмите `Ctrl + Shift + P` (или `Cmd + Shift + P` на macOS)
+   - Выберите `Python: Select Interpreter`
+   - Выберите `Enter interpreter path...`
+   - Скопируйте путь из команды выше и добавьте `/bin/python3` в конце
+   
+   Например: `/Users/user/Library/Caches/pypoetry/virtualenvs/ddd-kafka-python-xxx/bin/python3`
 
 3. **Установите pre-commit хуки**
 
