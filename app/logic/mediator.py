@@ -40,14 +40,14 @@ class Mediator:
         event: EventType,
         event_handlers: Iterable[BaseEventHandler[EventType, EventResultType]],
     ):
-        self.events_map[event.__class__].extend(event_handlers)
+        self.events_map[event].extend(event_handlers)
 
     def register_command(
         self,
         command: CommandType,
         command_handlers: Iterable[BaseCommandHandler[CommandType, CommandResultType]],
     ):
-        self.commands_map[command.__class__].extend(command_handlers)
+        self.commands_map[command].extend(command_handlers)
 
     async def handle_event(self, event: BaseEvent) -> Iterable[EventResultType]:
         event_type = event.__class__
