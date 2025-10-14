@@ -6,7 +6,7 @@
     "value_objects": "constant",
     "exceptions": "error",
     "application": "controller",
-    "infra": "server",
+    "infrastructure": "server",
     "logic": "rules",
     "api": "api"
   }

@@ -19,7 +19,7 @@ class TextValueObject(BaseValueObject):
         if len(self.value) > 255:
             raise TextTooLongException(text=self.value)
 
-    def as_generic_type(self) -> str:
+    def as_generic_type(self):
         return str(self.value)
 
 
