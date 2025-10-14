@@ -19,7 +19,7 @@ class TextValueObject(BaseValueObject):
         if len(self.value) > 255:
             raise TextTooLongException(text=self.value)
 
-    def as_generic_type(self):
+    def as_generic_type(self) -> str:
         return str(self.value)
 
 
@@ -34,5 +34,5 @@ class TitleValueObject(BaseValueObject):
         if len(self.value) > 50:
             raise TitleTooLongException(text=self.value)
 
-    def as_generic_type(self):
+    def as_generic_type(self) -> str:
         return str(self.value)
