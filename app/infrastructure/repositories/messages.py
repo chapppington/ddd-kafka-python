@@ -38,3 +38,7 @@ class DummyInMemoryChatRepository(BaseChatRepository):
 
     async def add_chat(self, chat: ChatEntity):
         self._saved_chats.append(chat)
+
+
+@dataclass
+class MongoDBChatRepository(BaseChatRepository): ...

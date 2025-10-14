@@ -16,9 +16,7 @@ async def test_create_chat_command_success(
     faker: Faker,
 ):
     title_text = faker.text()[:50]
-    chat: ChatEntity = (
-        await mediator.handle_command(CreateChatCommand(title=title_text))
-    )[0]
+    chat, *_ = await mediator.handle_command(CreateChatCommand(title=title_text))
 
     assert await chat_repository.check_chat_exists_by_title(
         title=chat.title.as_generic_type(),
@@ -32,7 +30,8 @@ async def test_create_chat_command_already_exists(
     faker: Faker,
 ):
     title_text = faker.text()[:50]
-    chat: ChatEntity = ChatEntity(title=TitleValueObject(value=title_text))
+
+    chat = ChatEntity(title=TitleValueObject(value=title_text))
 
     await chat_repository.add_chat(chat)
 

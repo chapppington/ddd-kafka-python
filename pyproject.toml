@@ -6,12 +6,14 @@ authors = [
     {name = "chapppington",email = "stas.mega.96@bk.ru"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11, <4.0.0"
 dependencies = [
     "uvicorn (>=0.37.0,<0.38.0)",
     "fastapi (>=0.119.0,<0.120.0)",
     "motor (>=3.7.1,<4.0.0)",
     "pytest-asyncio (>=1.2.0,<2.0.0)",
+    "punq (>=0.7.0,<0.8.0)",
+    "pydantic (>=2.12.1,<3.0.0)",
 ]
 
 
