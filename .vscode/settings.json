@@ -9,7 +9,8 @@
     "infrastructure": "server",
     "logic": "rules",
     "api": "api",
-    "app": "src"
+    "app": "src",
+    "queries": "database"
   },
   "python.testing.pytestArgs": [
     "."

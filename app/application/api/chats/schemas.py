@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 from domain.entities.chats import ChatEntity
@@ -33,4 +35,24 @@ class CreateMessageResponseSchema(BaseModel):
         return cls(
             oid=entity.oid,
             text=entity.text.as_generic_type(),
+        )
+
+
+class MessageDetailSchema(BaseModel):
+    oid: str
+    text: str
+    created_at: datetime
+
+
+class ChatDetailSchema(BaseModel):
+    oid: str
+    title: str
+    created_at: datetime
+
+    @classmethod
+    def from_entity(cls, chat: ChatEntity) -> "ChatDetailSchema":
+        return cls(
+            oid=chat.oid,
+            title=chat.title.as_generic_type(),
+            created_at=chat.created_at,
         )
