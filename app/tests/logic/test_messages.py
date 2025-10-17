@@ -4,8 +4,8 @@ from faker import Faker
 from domain.entities.chats import ChatEntity
 from domain.value_objects.chats import TitleValueObject
 from infrastructure.repositories.chats.base import BaseChatRepository
-from logic.commands.messages import CreateChatCommand
-from logic.exceptions.messages import ChatAlreadyExistsException
+from logic.commands.chats import CreateChatCommand
+from logic.exceptions.chats import ChatAlreadyExistsException
 from logic.mediator import Mediator
 
 

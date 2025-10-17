@@ -8,7 +8,7 @@ from punq import (
 
 from infrastructure.repositories.chats.base import BaseChatRepository
 from infrastructure.repositories.chats.mongo import MongoDBChatRepository
-from logic.commands.messages import (
+from logic.commands.chats import (
     CreateChatCommand,
     CreateChatCommandHandler,
 )

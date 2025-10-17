@@ -7,7 +7,7 @@ from logic.commands.base import (
     BaseCommand,
     BaseCommandHandler,
 )
-from logic.exceptions.messages import ChatAlreadyExistsException
+from logic.exceptions.chats import ChatAlreadyExistsException
 
 
 @dataclass(frozen=True)

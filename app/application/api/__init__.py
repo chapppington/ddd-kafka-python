@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from application.api.messages.handlers import router as messages_router
+from application.api.chats.handlers import router as chats_router
 
 
 main_router = APIRouter()
 
-main_router.include_router(messages_router)
+main_router.include_router(chats_router)
