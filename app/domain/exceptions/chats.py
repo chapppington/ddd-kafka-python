@@ -4,23 +4,23 @@ from domain.exceptions.base import ApplicationException
 
 
 @dataclass(eq=False)
-class MessageException(ApplicationException):
+class ChatException(ApplicationException):
     @property
     def message(self) -> str:
-        return "Message exception occurred"
+        return "Chat exception occurred"
 
 
 @dataclass(eq=False)
-class EmptyTextException(MessageException):
-    @property
-    def message(self) -> str:
-        return "Text is empty"
-
-
-@dataclass(eq=False)
-class TextTooLongException(MessageException):
+class TitleTooLongException(ChatException):
     text: str
 
     @property
     def message(self) -> str:
-        return f"Text too long: {self.text[:30]}..."
+        return f"Title too long: {self.text[:30]}..."
+
+
+@dataclass(eq=False)
+class EmptyTitleException(ChatException):
+    @property
+    def message(self) -> str:
+        return "Title is empty"

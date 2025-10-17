@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from domain.exceptions.messages import (
-    EmptyTextException,
+from domain.exceptions.chats import (
+    EmptyTitleException,
     TitleTooLongException,
 )
 from domain.value_objects.base import BaseValueObject
@@ -13,7 +13,7 @@ class TitleValueObject(BaseValueObject):
 
     def validate(self):
         if not self.value:
-            raise EmptyTextException()
+            raise EmptyTitleException()
 
         if len(self.value) > 50:
             raise TitleTooLongException(text=self.value)
