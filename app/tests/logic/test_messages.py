@@ -3,7 +3,7 @@ from faker import Faker
 
 from domain.entities.messages import ChatEntity
 from domain.value_objects.messages import TitleValueObject
-from infrastructure.repositories.messages.base import BaseChatRepository
+from infrastructure.repositories.chats.base import BaseChatRepository
 from logic.commands.messages import CreateChatCommand
 from logic.exceptions.messages import ChatAlreadyExistsException
 from logic.mediator import Mediator

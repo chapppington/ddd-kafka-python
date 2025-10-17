@@ -3,10 +3,8 @@ from dataclasses import dataclass
 from motor.core import AgnosticClient
 
 from domain.entities.messages import ChatEntity
-from infrastructure.repositories.messages.base import BaseChatRepository
-from infrastructure.repositories.messages.converters import (
-    convert_chat_entity_to_document,
-)
+from infrastructure.repositories.chats.base import BaseChatRepository
+from infrastructure.repositories.chats.converters import convert_chat_entity_to_document
 
 
 @dataclass
