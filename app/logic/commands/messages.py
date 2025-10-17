@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from domain.entities.messages import ChatEntity
 from domain.value_objects.messages import TitleValueObject
-from infrastructure.repositories.messages import BaseChatRepository
+from infrastructure.repositories.messages.base import BaseChatRepository
 from logic.commands.base import (
     BaseCommand,
     BaseCommandHandler,

@@ -1,22 +1,10 @@
-from abc import (
-    ABC,
-    abstractmethod,
-)
 from dataclasses import (
     dataclass,
     field,
 )
 
 from domain.entities.messages import ChatEntity
-
-
-@dataclass
-class BaseChatRepository(ABC):
-    @abstractmethod
-    async def check_chat_exists_by_title(self, title: str) -> bool: ...
-
-    @abstractmethod
-    async def add_chat(self, chat: ChatEntity): ...
+from infrastructure.repositories.messages.base import BaseChatRepository
 
 
 @dataclass
@@ -38,7 +26,3 @@ class DummyInMemoryChatRepository(BaseChatRepository):
 
     async def add_chat(self, chat: ChatEntity):
         self._saved_chats.append(chat)
-
-
-@dataclass
-class MongoDBChatRepository(BaseChatRepository): ...
