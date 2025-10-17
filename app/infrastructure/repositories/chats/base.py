@@ -4,7 +4,7 @@ from abc import (
 )
 from dataclasses import dataclass
 
-from domain.entities.messages import ChatEntity
+from domain.entities.chats import ChatEntity
 
 
 @dataclass

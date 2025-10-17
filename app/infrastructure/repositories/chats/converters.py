@@ -1,7 +1,5 @@
-from domain.entities.messages import (
-    ChatEntity,
-    MessageEntity,
-)
+from domain.entities.chats import ChatEntity
+from domain.entities.messages import MessageEntity
 
 
 def convert_message_to_document(message: MessageEntity) -> dict:

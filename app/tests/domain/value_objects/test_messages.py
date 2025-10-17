@@ -2,19 +2,15 @@ from datetime import datetime
 
 import pytest
 
-from domain.entities.messages import (
-    ChatEntity,
-    MessageEntity,
-)
+from domain.entities.chats import ChatEntity
+from domain.entities.messages import MessageEntity
 from domain.events.messages import NewMessageReceivedEvent
 from domain.exceptions.messages import (
     TextTooLongException,
     TitleTooLongException,
 )
-from domain.value_objects.messages import (
-    TextValueObject,
-    TitleValueObject,
-)
+from domain.value_objects.chats import TitleValueObject
+from domain.value_objects.messages import TextValueObject
 
 
 @pytest.mark.parametrize(
