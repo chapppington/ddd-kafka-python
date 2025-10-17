@@ -18,5 +18,8 @@
   "python.testing.pytestEnabled": true,
   "cSpell.words": [
     "punq"
-  ]
+  ],
+  "files.exclude": {
+    "**/__pycache__": true,
+  }
 }

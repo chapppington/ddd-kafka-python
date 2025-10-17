@@ -4,14 +4,18 @@ from fastapi import (
     HTTPException,
     status,
 )
+from punq import Container
 
 from application.api.chats.schemas import (
     CreateChatRequestSchema,
     CreateChatResponseSchema,
+    CreateMessageRequestSchema,
+    CreateMessageResponseSchema,
 )
 from application.api.schemas import ErrorResponseSchema
 from domain.exceptions.base import ApplicationException
 from logic.commands.chats import CreateChatCommand
+from logic.commands.messages import CreateMessageCommand
 from logic.init import init_container
 from logic.mediator import Mediator
 
@@ -47,3 +51,33 @@ async def create_chat_handler(
         )
 
     return CreateChatResponseSchema.from_entity(chat)
+
+
+@router.post(
+    "/{chat_oid}/messages",
+    status_code=status.HTTP_201_CREATED,
+    description="Ручка на добавление нового сообщения в чат с переданным ObjectID чата",
+    responses={
+        status.HTTP_201_CREATED: {"model": CreateMessageResponseSchema},
+        status.HTTP_400_BAD_REQUEST: {"model": ErrorResponseSchema},
+    },
+)
+async def create_message_handler(
+    chat_oid: str,
+    schema: CreateMessageRequestSchema,
+    container: Container = Depends(init_container),
+) -> CreateMessageResponseSchema:
+    """Добавить новое сообщение в чат."""
+    mediator: Mediator = container.resolve(Mediator)
+
+    try:
+        message, *_ = await mediator.handle_command(
+            CreateMessageCommand(text=schema.text, chat_oid=chat_oid),
+        )
+    except ApplicationException as exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": exception.message},
+        )
+
+    return CreateMessageResponseSchema.from_entity(message)

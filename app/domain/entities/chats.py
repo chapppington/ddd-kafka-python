@@ -5,15 +5,20 @@ from dataclasses import (
 
 from domain.entities.base import BaseEntity
 from domain.entities.messages import MessageEntity
-from domain.events.chats import NewChatCreatedEvent
-from domain.events.messages import NewMessageReceivedEvent
+from domain.events.chats import (
+    NewChatCreatedEvent,
+    NewMessageReceivedEvent,
+)
 from domain.value_objects.chats import TitleValueObject
 
 
 @dataclass(eq=False)
 class ChatEntity(BaseEntity):
     title: TitleValueObject
-    messages: list[MessageEntity] = field(default_factory=list, kw_only=True)
+    messages: set[MessageEntity] = field(
+        default_factory=set,
+        kw_only=True,
+    )
 
     @classmethod
     def create_chat(cls, title: TitleValueObject) -> "ChatEntity":
@@ -24,14 +29,15 @@ class ChatEntity(BaseEntity):
                 chat_title=new_chat.title.as_generic_type(),
             ),
         )
+
         return new_chat
 
     def add_message(self, message: MessageEntity):
-        self.messages.append(message)
+        self.messages.add(message)
         self.register_event(
             NewMessageReceivedEvent(
                 message_text=message.text.as_generic_type(),
-                message_oid=message.oid,
                 chat_oid=self.oid,
+                message_oid=message.oid,
             ),
         )

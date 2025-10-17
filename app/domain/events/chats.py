@@ -7,3 +7,10 @@ from domain.events.base import BaseEvent
 class NewChatCreatedEvent(BaseEvent):
     chat_oid: str
     chat_title: str
+
+
+@dataclass
+class NewMessageReceivedEvent(BaseEvent):
+    message_text: str
+    message_oid: str
+    chat_oid: str

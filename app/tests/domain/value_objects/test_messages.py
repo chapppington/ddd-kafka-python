@@ -4,7 +4,7 @@ import pytest
 
 from domain.entities.chats import ChatEntity
 from domain.entities.messages import MessageEntity
-from domain.events.messages import NewMessageReceivedEvent
+from domain.events.chats import NewMessageReceivedEvent
 from domain.exceptions.chats import TitleTooLongException
 from domain.exceptions.messages import TextTooLongException
 from domain.value_objects.chats import TitleValueObject
