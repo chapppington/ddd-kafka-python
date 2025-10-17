@@ -8,12 +8,15 @@
     "application": "controller",
     "infrastructure": "server",
     "logic": "rules",
-    "api": "api"
+    "api": "api",
+    "app": "src"
   },
   "python.testing.pytestArgs": [
     "."
   ],
   "python.testing.unittestEnabled": false,
-  "python.testing.pytestEnabled": true
+  "python.testing.pytestEnabled": true,
+  "cSpell.words": [
+    "punq"
+  ]
 }
-

@@ -5,10 +5,8 @@ from dataclasses import (
 
 from domain.entities.base import BaseEntity
 from domain.entities.messages import MessageEntity
-from domain.events.messages import (
-    NewChatCreatedEvent,
-    NewMessageReceivedEvent,
-)
+from domain.events.chats import NewChatCreatedEvent
+from domain.events.messages import NewMessageReceivedEvent
 from domain.value_objects.chats import TitleValueObject
 
 
