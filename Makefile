@@ -2,6 +2,8 @@ APP_CONTAINER = main-app
 STORAGES_CONTAINER = chat-mongodb
 APP_FILE = docker_compose/app.yaml
 STORAGES_FILE = docker_compose/storages.yaml
+MESSAGING_FILE = docker_compose/messaging.yaml
+MESSAGING_CONTAINER = main-kafka
 DC = docker compose
 ENV_FILE = --env-file .env # это уже вместе с командой (все норм, не трогай)
 EXEC = docker exec -it
@@ -9,11 +11,11 @@ LOGS = docker logs
 
 .PHONY: all
 all:
-	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} ${ENV_FILE} up --build -d
+	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} -f ${MESSAGING_FILE} ${ENV_FILE} up --build -d
 
 .PHONY: all-down
 all-down:
-	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} ${ENV_FILE} down
+	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} -f ${MESSAGING_FILE} ${ENV_FILE} down
 
 .PHONY: storages
 storages:
@@ -37,12 +39,25 @@ app-logs:
 
 .PHONY: app-shell
 app-shell:
-	${EXEC} ${APP_CONTAINER} ash
+	${EXEC} ${APP_CONTAINER} bash
 
 
 .PHONY: app-down
 app-down:
 	${DC} -f ${APP_FILE} down
+
+
+.PHONY: messaging
+messaging:
+	${DC} -f ${MESSAGING_FILE} ${ENV_FILE} up  --build -d
+
+.PHONY: messaging-down
+messaging-down:
+	${DC} -f ${MESSAGING_FILE} down
+
+.PHONY: messaging-logs
+messaging-logs:
+	${DC} -f ${MESSAGING_FILE} logs -f
 
 
 # чтобы добавить это перед коммитом надо его установить
