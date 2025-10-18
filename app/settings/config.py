@@ -12,6 +12,10 @@ class Config(BaseSettings):
         default="chat",
         alias="MONGODB_CHAT_COLLECTION",
     )
+    mongodb_message_collection: str = Field(
+        default="message",
+        alias="MONGODB_MESSAGE_COLLECTION",
+    )
 
     # без этого не будут подставляться значения из .env файла
     model_config = SettingsConfigDict(

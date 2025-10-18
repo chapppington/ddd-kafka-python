@@ -8,12 +8,5 @@ from infrastructure.repositories.messages.base import BaseMessagesRepository
 
 @dataclass
 class MongoDBMessagesRepository(BaseMessagesRepository, BaseMongoDBRepository):
-    async def add_message(self, chat_oid: str, message: MessageEntity) -> None:
-        await self._collection.update_one(
-            filter={"oid": chat_oid},
-            update={
-                "$push": {
-                    "messages": convert_message_entity_to_document(message),
-                },
-            },
-        )
+    async def add_message(self, message: MessageEntity) -> None:
+        await self._collection.insert_one(convert_message_entity_to_document(message))

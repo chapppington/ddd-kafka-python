@@ -24,8 +24,12 @@ def test_create_message(text_value, should_raise):
             TextValueObject(value=text_value)
     else:
         text = TextValueObject(value=text_value)
-        message = MessageEntity(text=text)
+        # Create a chat to get a valid chat_oid
+        title = TitleValueObject(value="Test Chat")
+        chat = ChatEntity(title=title)
+        message = MessageEntity(chat_oid=chat.oid, text=text)
         assert message.text == text
+        assert message.chat_oid == chat.oid
         assert message.created_at.date() == datetime.today().date()
 
 
@@ -52,11 +56,15 @@ def test_add_message_to_chat():
     title = TitleValueObject(value="Hello, world!")
     chat = ChatEntity(title=title)
 
-    message = MessageEntity(text=TextValueObject(value="Hello, world!"))
+    message = MessageEntity(
+        chat_oid=chat.oid,
+        text=TextValueObject(value="Hello, world!"),
+    )
 
     chat.add_message(message)
 
     assert message in chat.messages
+    assert message.chat_oid == chat.oid
     assert chat.created_at.date() == datetime.today().date()
     assert chat.updated_at.date() == datetime.today().date()
 
@@ -64,7 +72,10 @@ def test_add_message_to_chat():
 def test_new_message_received_event():
     title = TitleValueObject(value="Hello, world!")
     chat = ChatEntity(title=title)
-    message = MessageEntity(text=TextValueObject(value="Hello, world!"))
+    message = MessageEntity(
+        chat_oid=chat.oid,
+        text=TextValueObject(value="Hello, world!"),
+    )
     chat.add_message(message)
 
     events = chat.pull_events()

@@ -24,9 +24,6 @@ def convert_chat_entity_to_document(chat: ChatEntity) -> dict:
         "title": chat.title.as_generic_type(),
         "created_at": chat.created_at,
         "updated_at": chat.updated_at,
-        "messages": [
-            convert_message_entity_to_document(message) for message in chat.messages
-        ],
     }
 
 

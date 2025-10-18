@@ -6,4 +6,5 @@ from domain.value_objects.messages import TextValueObject
 
 @dataclass(eq=False)
 class MessageEntity(BaseEntity):
+    chat_oid: str
     text: TextValueObject
