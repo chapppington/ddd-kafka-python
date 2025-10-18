@@ -23,6 +23,10 @@ from logic.queries.chats import (
     GetChatDetailQuery,
     GetChatDetailQueryHandler,
 )
+from logic.queries.messages import (
+    GetMessagesQuery,
+    GetMessagesQueryHandler,
+)
 from settings.config import Config
 
 
@@ -82,10 +86,13 @@ def _init_container() -> Container:
 
     # Query handlers
     container.register(GetChatDetailQueryHandler)
+    container.register(GetMessagesQueryHandler)
 
     # Mediator
     def init_mediator() -> Mediator:
         mediator = Mediator()
+
+        # Register command handlers
         mediator.register_command(
             CreateChatCommand,
             [container.resolve(CreateChatCommandHandler)],
@@ -94,9 +101,15 @@ def _init_container() -> Container:
             CreateMessageCommand,
             [container.resolve(CreateMessageCommandHandler)],
         )
+
+        # Register query handlers
         mediator.register_query(
             GetChatDetailQuery,
             container.resolve(GetChatDetailQueryHandler),
+        )
+        mediator.register_query(
+            GetMessagesQuery,
+            container.resolve(GetMessagesQueryHandler),
         )
 
         return mediator
