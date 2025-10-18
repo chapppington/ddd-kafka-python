@@ -18,9 +18,33 @@
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
   "cSpell.words": [
-    "punq"
+    "autoflake",
+    "BASICAUTH",
+    "cursorignore",
+    "dbdata",
+    "docformatter",
+    "ipython",
+    "isort",
+    "libpq",
+    "mypy",
+    "nmap",
+    "punq",
+    "pycache",
+    "pyproject",
+    "pytest",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONPATH",
+    "PYTHONUNBUFFERED",
+    "pyupgrade",
+    "uvicorn",
+    "venv",
+    "virtualenvs"
+  ],
+  "cSpell.language": "en",
+  "cSpell.ignoreRegExpList": [
+    "/[а-яА-ЯёЁ]+/g"
   ],
   "files.exclude": {
-    "**/__pycache__": true,
+    "**/__pycache__": true
   }
 }

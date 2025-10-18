@@ -12,6 +12,7 @@ from domain.value_objects.messages import TextValueObject
 def convert_message_entity_to_document(message: MessageEntity) -> dict:
     return {
         "oid": message.oid,
+        "chat_oid": message.chat_oid,
         "text": message.text.as_generic_type(),
         "created_at": message.created_at,
         "updated_at": message.updated_at,
@@ -31,19 +32,16 @@ def convert_message_document_to_entity(
     message_document: Mapping[str, Any],
 ) -> MessageEntity:
     return MessageEntity(
-        text=TextValueObject(value=message_document["text"]),
         oid=message_document["oid"],
+        chat_oid=message_document["chat_oid"],
+        text=TextValueObject(value=message_document["text"]),
         created_at=message_document["created_at"],
     )
 
 
 def convert_chat_document_to_entity(chat_document: Mapping[str, Any]) -> ChatEntity:
     return ChatEntity(
-        title=TitleValueObject(value=chat_document["title"]),
         oid=chat_document["oid"],
+        title=TitleValueObject(value=chat_document["title"]),
         created_at=chat_document["created_at"],
-        messages={
-            convert_message_document_to_entity(message_document)
-            for message_document in chat_document["messages"]
-        },
     )

@@ -29,10 +29,12 @@ class CreateMessageCommandHandler(BaseCommandHandler[CreateMessageCommand, ChatE
         if not chat:
             raise ChatNotFoundException(chat_oid=command.chat_oid)
 
-        message = MessageEntity(text=TextValueObject(value=command.text))
+        message = MessageEntity(
+            chat_oid=command.chat_oid,
+            text=TextValueObject(value=command.text),
+        )
         chat.add_message(message)
         await self.message_repository.add_message(
-            chat_oid=command.chat_oid,
             message=message,
         )
 
