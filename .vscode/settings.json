@@ -5,12 +5,15 @@
     "entities": "class",
     "value_objects": "constant",
     "exceptions": "error",
-    "application": "controller",
+    "application": "app",
     "infrastructure": "server",
     "logic": "rules",
-    "api": "api",
+    "api": "json",
     "app": "src",
-    "queries": "database"
+    "queries": "class",
+    "mediator": "api",
+    "message_brokers": "mail",
+    "commands": "class"
   },
   "python.testing.pytestArgs": [
     "."

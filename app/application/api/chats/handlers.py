@@ -21,7 +21,7 @@ from domain.exceptions.base import ApplicationException
 from logic.commands.chats import CreateChatCommand
 from logic.commands.messages import CreateMessageCommand
 from logic.init import init_container
-from logic.mediator import Mediator
+from logic.mediator.base import Mediator
 from logic.queries.chats import GetChatDetailQuery
 from logic.queries.messages import GetMessagesQuery
 

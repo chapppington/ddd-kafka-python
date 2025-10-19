@@ -1,3 +1,4 @@
+# isort: off
 from pydantic import BaseModel
 
 from infrastructure.repositories.filters.messages import (
@@ -10,4 +11,7 @@ class GetMessagesFilters(BaseModel):
     offset: int = 0
 
     def to_infra(self):
-        return GetMessagesInfraFilters(limit=self.limit, offset=self.offset)
+        return GetMessagesInfraFilters(
+            limit=self.limit,
+            offset=self.offset,
+        )

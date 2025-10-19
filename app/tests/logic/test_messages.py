@@ -6,7 +6,7 @@ from domain.value_objects.chats import TitleValueObject
 from infrastructure.repositories.chats.base import BaseChatsRepository
 from logic.commands.chats import CreateChatCommand
 from logic.exceptions.chats import ChatAlreadyExistsException
-from logic.mediator import Mediator
+from logic.mediator.base import Mediator
 
 
 @pytest.mark.asyncio

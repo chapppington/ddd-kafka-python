@@ -10,13 +10,17 @@ from typing import (
 )
 
 from domain.events.base import BaseEvent
+from infrastructure.message_brokers.base import BaseMessageBroker
 
 
 EventType = TypeVar("EventType", bound=BaseEvent)
 EventResultType = TypeVar("EventResultType", bound=Any)
 
 
-@dataclass(frozen=True)
+@dataclass
 class BaseEventHandler(ABC, Generic[EventType, EventResultType]):
+    message_broker: BaseMessageBroker
+    broker_topic: str | None = None
+
     @abstractmethod
     def handle(self, event: EventType) -> EventResultType: ...

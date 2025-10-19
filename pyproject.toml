@@ -17,6 +17,7 @@ dependencies = [
     "httpx (>=0.28.1,<0.29.0)",
     "pydantic-settings (>=2.11.0,<3.0.0)",
     "aiokafka (>=0.10.0,<0.11.0)",
+    "orjson (>=3.11.3,<4.0.0)",
 ]
 
 

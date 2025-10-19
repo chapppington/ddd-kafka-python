@@ -9,6 +9,8 @@ from typing import (
     TypeVar,
 )
 
+from logic.mediator.event import EventMediator
+
 
 @dataclass(frozen=True)
 class BaseCommand(ABC): ...
@@ -20,5 +22,7 @@ CommandResultType = TypeVar("CommandResultType", bound=Any)
 
 @dataclass(frozen=True)
 class BaseCommandHandler(ABC, Generic[CommandType, CommandResultType]):
+    _mediator: EventMediator
+
     @abstractmethod
     async def handle(self, command: CommandType) -> CommandResultType: ...

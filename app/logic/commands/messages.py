@@ -20,7 +20,7 @@ class CreateMessageCommand(BaseCommand):
 
 @dataclass(frozen=True)
 class CreateMessageCommandHandler(BaseCommandHandler[CreateMessageCommand, ChatEntity]):
-    message_repository: BaseMessagesRepository
+    messages_repository: BaseMessagesRepository
     chats_repository: BaseChatsRepository
 
     async def handle(self, command: CreateMessageCommand) -> MessageEntity:
@@ -34,7 +34,7 @@ class CreateMessageCommandHandler(BaseCommandHandler[CreateMessageCommand, ChatE
             text=TextValueObject(value=command.text),
         )
         chat.add_message(message)
-        await self.message_repository.add_message(
+        await self.messages_repository.add_message(
             message=message,
         )
 
