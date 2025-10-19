@@ -16,10 +16,8 @@ class Config(BaseSettings):
         default="message",
         alias="MONGODB_MESSAGE_COLLECTION",
     )
-    new_chats_event_topic: str = Field(
-        default="new_chats_topic",
-        alias="NEW_CHATS_EVENT_TOPIC",
-    )
+    new_message_received_topic: str = Field(default="new-message-received-topic")
+    new_chats_event_topic: str = Field(default="new-chats-topic")
     kafka_url: str = Field(alias="KAFKA_URL")
 
     # без этого не будут подставляться значения из .env файла

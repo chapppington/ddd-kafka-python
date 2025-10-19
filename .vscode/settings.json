@@ -13,7 +13,8 @@
     "queries": "class",
     "mediator": "api",
     "message_brokers": "mail",
-    "commands": "class"
+    "commands": "class",
+    "websockets": "less",
   },
   "python.testing.pytestArgs": [
     "."

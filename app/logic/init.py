@@ -7,7 +7,10 @@ from punq import (
     Scope,
 )
 
-from domain.events.chats import NewChatCreatedEvent
+from domain.events.chats import (
+    NewChatCreatedEvent,
+    NewMessageReceivedEvent,
+)
 from infrastructure.message_brokers.base import BaseMessageBroker
 from infrastructure.message_brokers.kafka import KafkaMessageBroker
 from infrastructure.repositories.chats.base import BaseChatsRepository
@@ -23,6 +26,7 @@ from logic.commands.messages import (
     CreateMessageCommandHandler,
 )
 from logic.events.chats import NewChatCreatedEventHandler
+from logic.events.messages import NewMessageReceivedEventHandler
 from logic.mediator.base import Mediator
 from logic.mediator.event import EventMediator
 from logic.queries.chats import (
@@ -124,9 +128,19 @@ def _init_container() -> Container:
             message_broker=container.resolve(BaseMessageBroker),
         )
 
+        new_message_received_handler = NewMessageReceivedEventHandler(
+            message_broker=container.resolve(BaseMessageBroker),
+            broker_topic=config.new_message_received_topic,
+        )
+
         mediator.register_event(
             NewChatCreatedEvent,
             [new_chat_created_event_handler],
+        )
+
+        mediator.register_event(
+            NewMessageReceivedEvent,
+            [new_message_received_handler],
         )
 
         mediator.register_command(
