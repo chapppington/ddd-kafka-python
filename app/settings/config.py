@@ -16,7 +16,7 @@ class Config(BaseSettings):
         default="message",
         alias="MONGODB_MESSAGE_COLLECTION",
     )
-    new_message_received_topic: str = Field(default="new-message-received-topic")
+    new_message_received_topic: str = Field(default="new-messages")
     new_chats_event_topic: str = Field(default="new-chats-topic")
     kafka_url: str = Field(alias="KAFKA_URL")
 
