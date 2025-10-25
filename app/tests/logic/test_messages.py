@@ -1,9 +1,9 @@
 import pytest
 from faker import Faker
+from infrastructure.repositories.chats.base import BaseChatsRepository
 
 from domain.entities.chats import ChatEntity
 from domain.value_objects.chats import TitleValueObject
-from infrastructure.repositories.chats.base import BaseChatsRepository
 from logic.commands.chats import CreateChatCommand
 from logic.exceptions.chats import ChatAlreadyExistsException
 from logic.mediator.base import Mediator

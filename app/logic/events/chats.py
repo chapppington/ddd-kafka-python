@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
-from domain.events.chats import NewChatCreatedEvent
 from infrastructure.message_brokers.converters import convert_event_to_broker_message
+
+from domain.events.chats import NewChatCreatedEvent
 from logic.events.base import BaseEventHandler
 
 

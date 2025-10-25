@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 
-from domain.entities.chats import ChatEntity
 from infrastructure.repositories.base.mongo import BaseMongoDBRepository
 from infrastructure.repositories.chats.base import BaseChatsRepository
 from infrastructure.repositories.converters import (
     convert_chat_document_to_entity,
     convert_chat_entity_to_document,
 )
+
+from domain.entities.chats import ChatEntity
 
 
 @dataclass

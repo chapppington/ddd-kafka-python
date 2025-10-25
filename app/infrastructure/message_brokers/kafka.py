@@ -4,7 +4,6 @@ from typing import AsyncIterator
 import orjson
 from aiokafka.consumer import AIOKafkaConsumer
 from aiokafka.producer import AIOKafkaProducer
-
 from infrastructure.message_brokers.base import BaseMessageBroker
 
 

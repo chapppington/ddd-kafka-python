@@ -7,10 +7,6 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import (
-    Any,
-    Mapping,
-)
 
 from fastapi import WebSocket
 
@@ -29,7 +25,7 @@ class BaseConnectionManager(ABC):
     async def remove_connection(self, websocket: WebSocket, key: str): ...
 
     @abstractmethod
-    async def send_all(self, key: str, json_message: Mapping[str, Any]): ...
+    async def send_all(self, key: str, bytes_: bytes): ...
 
 
 @dataclass
@@ -39,9 +35,8 @@ class ConnectionManager(BaseConnectionManager):
         self.connections_map[key].append(websocket)
 
     async def remove_connection(self, websocket: WebSocket, key: str):
-        await websocket.close()
         self.connections_map[key].remove(websocket)
 
-    async def send_all(self, key: str, json_message: Mapping[str, Any]):
+    async def send_all(self, key: str, bytes_: bytes):
         for websocket in self.connections_map[key]:
-            await websocket.send_json(json_message)
+            await websocket.send_bytes(bytes_)

@@ -1,27 +1,28 @@
 from functools import lru_cache
 
+from aiojobs import Scheduler
 from aiokafka.consumer import AIOKafkaConsumer
 from aiokafka.producer import AIOKafkaProducer
-from motor.motor_asyncio import AsyncIOMotorClient
-from punq import (
-    Container,
-    Scope,
-)
-
-from application.api.common.websockets.managers import (
-    BaseConnectionManager,
-    ConnectionManager,
-)
-from domain.events.chats import (
-    NewChatCreatedEvent,
-    NewMessageReceivedEvent,
-)
 from infrastructure.message_brokers.base import BaseMessageBroker
 from infrastructure.message_brokers.kafka import KafkaMessageBroker
 from infrastructure.repositories.chats.base import BaseChatsRepository
 from infrastructure.repositories.chats.mongo import MongoDBChatsRepository
 from infrastructure.repositories.messages.base import BaseMessagesRepository
 from infrastructure.repositories.messages.mongo import MongoDBMessagesRepository
+from infrastructure.websockets.managers import (
+    BaseConnectionManager,
+    ConnectionManager,
+)
+from motor.motor_asyncio import AsyncIOMotorClient
+from punq import (
+    Container,
+    Scope,
+)
+
+from domain.events.chats import (
+    NewChatCreatedEvent,
+    NewMessageReceivedEvent,
+)
 from logic.commands.chats import (
     CreateChatCommand,
     CreateChatCommandHandler,
@@ -31,7 +32,11 @@ from logic.commands.messages import (
     CreateMessageCommandHandler,
 )
 from logic.events.chats import NewChatCreatedEventHandler
-from logic.events.messages import NewMessageReceivedEventHandler
+from logic.events.messages import (
+    NewMessageReceivedEventHandler,
+    NewMessageReceivedFromBrokerEvent,
+    NewMessageReceivedFromBrokerEventHandler,
+)
 from logic.mediator.base import Mediator
 from logic.mediator.event import EventMediator
 from logic.queries.chats import (
@@ -120,6 +125,13 @@ def _init_container() -> Container:
         scope=Scope.singleton,
     )
 
+    # WebSocket Manager
+    container.register(
+        BaseConnectionManager,
+        instance=ConnectionManager(),
+        scope=Scope.singleton,
+    )
+
     # Mediator
     def init_mediator() -> Mediator:
         mediator = Mediator()
@@ -136,11 +148,21 @@ def _init_container() -> Container:
         new_chat_created_event_handler = NewChatCreatedEventHandler(
             broker_topic=config.new_chats_event_topic,
             message_broker=container.resolve(BaseMessageBroker),
+            connection_manager=container.resolve(BaseConnectionManager),
         )
 
         new_message_received_handler = NewMessageReceivedEventHandler(
             message_broker=container.resolve(BaseMessageBroker),
             broker_topic=config.new_message_received_topic,
+            connection_manager=container.resolve(BaseConnectionManager),
+        )
+
+        new_message_received_from_broker_handler = (
+            NewMessageReceivedFromBrokerEventHandler(
+                message_broker=container.resolve(BaseMessageBroker),
+                connection_manager=container.resolve(BaseConnectionManager),
+                broker_topic=config.new_message_received_topic,
+            )
         )
 
         mediator.register_event(
@@ -151,6 +173,11 @@ def _init_container() -> Container:
         mediator.register_event(
             NewMessageReceivedEvent,
             [new_message_received_handler],
+        )
+
+        mediator.register_event(
+            NewMessageReceivedFromBrokerEvent,
+            [new_message_received_from_broker_handler],
         )
 
         mediator.register_command(
@@ -176,10 +203,7 @@ def _init_container() -> Container:
 
     container.register(Mediator, factory=init_mediator)
     container.register(EventMediator, factory=init_mediator)
-    container.register(
-        BaseConnectionManager,
-        instance=ConnectionManager(),
-        scope=Scope.singleton,
-    )
+
+    container.register(Scheduler, factory=lambda: Scheduler(), scope=Scope.singleton)
 
     return container

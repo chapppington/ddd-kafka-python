@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 
+from infrastructure.repositories.chats.base import BaseChatsRepository
+from infrastructure.repositories.messages.base import BaseMessagesRepository
+
 from domain.entities.chats import ChatEntity
 from domain.entities.messages import MessageEntity
 from domain.value_objects.messages import TextValueObject
-from infrastructure.repositories.chats.base import BaseChatsRepository
-from infrastructure.repositories.messages.base import BaseMessagesRepository
 from logic.commands.base import (
     BaseCommand,
     BaseCommandHandler,

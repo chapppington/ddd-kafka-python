@@ -1,10 +1,10 @@
+from infrastructure.repositories.chats.base import BaseChatsRepository
+from infrastructure.repositories.chats.memory import DummyInMemoryChatsRepository
 from punq import (
     Container,
     Scope,
 )
 
-from infrastructure.repositories.chats.base import BaseChatsRepository
-from infrastructure.repositories.chats.memory import DummyInMemoryChatsRepository
 from logic.init import _init_container
 
 

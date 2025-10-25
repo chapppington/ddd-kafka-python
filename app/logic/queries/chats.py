@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Generic
 
-from domain.entities.chats import ChatEntity
 from infrastructure.repositories.chats.base import BaseChatsRepository
 from infrastructure.repositories.messages.base import BaseMessagesRepository
+
+from domain.entities.chats import ChatEntity
 from logic.exceptions.chats import ChatNotFoundException
 from logic.queries.base import (
     BaseQuery,

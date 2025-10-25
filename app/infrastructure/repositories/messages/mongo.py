@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from typing import Iterable
 
-from domain.entities.messages import MessageEntity
 from infrastructure.repositories.base.mongo import BaseMongoDBRepository
 from infrastructure.repositories.converters import (
     convert_message_document_to_entity,
@@ -9,6 +8,8 @@ from infrastructure.repositories.converters import (
 )
 from infrastructure.repositories.filters.messages import GetMessagesFilters
 from infrastructure.repositories.messages.base import BaseMessagesRepository
+
+from domain.entities.messages import MessageEntity
 
 
 @dataclass

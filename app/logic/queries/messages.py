@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from typing import Iterable
 
-from domain.entities.messages import MessageEntity
 from infrastructure.repositories.filters.messages import GetMessagesFilters
 from infrastructure.repositories.messages.base import BaseMessagesRepository
+
+from domain.entities.messages import MessageEntity
 from logic.queries.base import (
     BaseQuery,
     BaseQueryHandler,

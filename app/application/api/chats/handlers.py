@@ -4,6 +4,7 @@ from fastapi import (
     HTTPException,
     status,
 )
+
 from punq import Container
 
 from application.api.chats.filters import GetMessagesFilters

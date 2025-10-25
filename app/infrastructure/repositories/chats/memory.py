@@ -3,8 +3,9 @@ from dataclasses import (
     field,
 )
 
-from domain.entities.chats import ChatEntity
 from infrastructure.repositories.chats.base import BaseChatsRepository
+
+from domain.entities.chats import ChatEntity
 
 
 @dataclass
